@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:pokedex/interceptors/main.interceptor.dart';
 import 'package:pokedex/utils/logg_message.util.dart';
 
 import 'env.config.dart';
@@ -7,6 +8,8 @@ class APIService {
   final dio = Dio();
 
   APIService() {
+    dio.interceptors.add(MainInterceptor());
+
     dio.options.headers = {
       'Content-Type': 'application/json',
     };
