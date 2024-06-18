@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:pokedex/utils/logg_message.util.dart';
 
 import 'env.config.dart';
 
@@ -32,20 +33,20 @@ class APIService {
     } catch (e) {
       if (e is DioException) {
         if (e.type == DioExceptionType.connectionError) {
-          print('error: ${e.message}, typeError: "connectionError"');
+          printErrorLog(error: e.message, typeError: 'connectionError');
           rethrow;
         } else if (e.type == DioExceptionType.badResponse) {
-          print('error: ${e.message}, typeError: "badResponse"');
+          printErrorLog(error: e.message, typeError: 'badResponse');
           rethrow;
         } else if (e.type == DioExceptionType.cancel) {
-          print('error: ${e.message}, typeError: "cancel"');
+          printErrorLog(error: e.message, typeError: 'cancel');
           rethrow;
         } else {
-          print('error: ${e.message}, typeError: e.type');
+          printErrorLog(error: e.message, typeError: e.type);
           rethrow;
         }
       } else {
-        print("error: $e, typeError: ''");
+        printErrorLog(error: e, typeError: '');
         rethrow;
       }
     }
