@@ -2,7 +2,7 @@ class HomeDTO {
   int count;
   String next;
   String? previous;
-  List<ResultsDTO> results;
+  List<GeneralDTO> results;
 
   HomeDTO({
     required this.count,
@@ -11,19 +11,46 @@ class HomeDTO {
     required this.results,
   });
 
-  factory HomeDTO.fromJson(Map<String, dynamic> json) {
-    List<ResultsDTO> resultsDTO = [];
+  factory HomeDTO.fromJson(Map json) {
+    List<GeneralDTO> generalDTO = [];
     List info = json['results'];
 
-    resultsDTO = info.map((value) => ResultsDTO.fromJson(value)).toList();
+    generalDTO = info.map((value) => GeneralDTO.fromJson(value)).toList();
 
     return HomeDTO(
       count: json["count"],
       next: json["next"],
       previous: json["previous"],
-      results: resultsDTO,
+      results: generalDTO,
     );
   }
+
+  Map<String, dynamic> toJson() => {
+        "count": count,
+        "next": next,
+        "previous": previous,
+        "results": results.map((e) => e.toJson()).toList(),
+      };
+}
+
+class GeneralDTO {
+  String name;
+  String url;
+
+  GeneralDTO({
+    required this.name,
+    required this.url,
+  });
+
+  factory GeneralDTO.fromJson(Map<String, dynamic> json) => GeneralDTO(
+        name: json["name"],
+        url: json["url"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "name": name,
+        "url": url,
+      };
 }
 
 class ResultsDTO {
@@ -40,13 +67,21 @@ class ResultsDTO {
   factory ResultsDTO.fromJson(Map<String, dynamic> json) => ResultsDTO(
         id: json["id"],
         name: json["name"],
-        types: json["types"].map((type) => TypesDTO.fromJson(type)).toList(),
+        types: (json["types"] as List)
+            .map((type) => TypesDTO.fromJson(type))
+            .toList(),
       );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "types": types.map((e) => e.toJson()).toList(),
+      };
 }
 
 class TypesDTO {
   int slot;
-  List<TypeDTO> type;
+  TypeDTO type;
 
   TypesDTO({
     required this.slot,
@@ -55,8 +90,13 @@ class TypesDTO {
 
   factory TypesDTO.fromJson(Map<String, dynamic> json) => TypesDTO(
         slot: json["slot"],
-        type: json["type"].map((type) => TypeDTO.fromJson(type)).toList(),
+        type: TypeDTO.fromJson(json['type']),
       );
+
+  Map<String, dynamic> toJson() => {
+        "slot": slot,
+        "type": type.toJson(),
+      };
 }
 
 class TypeDTO {
@@ -72,4 +112,9 @@ class TypeDTO {
         name: json["name"],
         url: json["url"],
       );
+
+  Map<String, dynamic> toJson() => {
+        "name": name,
+        "url": url,
+      };
 }

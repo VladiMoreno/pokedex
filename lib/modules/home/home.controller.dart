@@ -20,6 +20,7 @@ class HomeController extends GetxController {
       super.onReady();
     } catch (e) {
       isLoading.value = false;
+      print(e);
     } finally {
       isLoading.value = false;
     }

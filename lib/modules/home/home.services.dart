@@ -18,11 +18,22 @@ class HomeService extends GetxService {
 
       String finalUrl = generateFinalUrl(getPokemonsPaginated, params);
 
-      final response = apiService.get(finalUrl);
+      final response = await apiService.get(finalUrl);
 
       HomeDTO homeDTO = HomeDTO.fromJson(response);
 
-      return homeDTO;
+      List data = [];
+
+      for (var element in homeDTO.results) {
+        final response = await apiService.getFullURL(element.url);
+
+        data.add(response);
+      }
+
+      List<ResultsDTO> listResultDTO =
+          data.map((e) => ResultsDTO.fromJson(e)).toList();
+
+      return listResultDTO.map((e) => e.toJson()).toList();
     } catch (e) {
       printMessageParam(
         message: 'Error en la función getPokemons del archivo home.service',
