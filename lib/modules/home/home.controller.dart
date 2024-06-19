@@ -7,7 +7,7 @@ class HomeController extends GetxController {
 
   var isLoading = RxBool(false);
   var pokemonsInfo = RxList([]);
-  var page = RxInt(1);
+  var page = RxInt(2);
 
   @override
   void onReady() async {
@@ -30,7 +30,10 @@ class HomeController extends GetxController {
     try {
       isLoading.value = true;
 
-      final response = await service.getPokemons(offest: page.value * 16);
+      final response = await service.getPokemons(
+        offest: page.value * 5,
+        limit: 5,
+      );
 
       pokemonsInfo.addAll(response);
 

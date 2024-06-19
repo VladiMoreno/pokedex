@@ -9,7 +9,7 @@ import 'home.dto.dart';
 class HomeService extends GetxService {
   final apiService = APIService();
 
-  Future getPokemons({offest = 0, limit = 16}) async {
+  Future getPokemons({offest = 0, limit = 10}) async {
     try {
       final params = <String, dynamic>{
         'limitValue': limit,

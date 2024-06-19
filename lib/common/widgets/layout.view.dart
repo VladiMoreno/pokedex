@@ -24,61 +24,80 @@ class _LayoutViewState extends State<LayoutView> {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        return Scaffold(
-          body: Column(
-            children: [
-              Container(
-                constraints: BoxConstraints(
-                  maxWidth: GetSize.width,
-                  maxHeight: GetSize.height - 65,
-                ),
-                child: widget.scrollView
-                    ? SingleChildScrollView(
-                        child: widget.screenToShow,
-                      )
-                    : widget.screenToShow,
-              ),
-            ],
+        return Container(
+          constraints: BoxConstraints(
+            maxWidth: GetSize.width,
           ),
-          bottomNavigationBar: BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            currentIndex: widget.pageSelected,
-            onTap: (value) {
-              switch (value) {
-                case 0:
-                  Get.toNamed('/home');
-                  break;
-                case 1:
-                  Get.toNamed('/home');
-                  break;
-                case 2:
-                  Get.toNamed('/home');
-                  break;
-                case 3:
-                  Get.toNamed('/config');
-                  break;
-                default:
-                  Get.toNamed('/home');
-              }
-            },
-            items: [
-              BottomNavigationBarItem(
-                icon: const FaIcon(FontAwesomeIcons.house),
-                label: 'labelHome'.tr,
+          alignment: Alignment.topCenter,
+          child: Scaffold(
+            backgroundColor: Colors.amber,
+            body: Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    constraints: BoxConstraints(
+                      maxWidth: GetSize.width > 500 ? 500 : GetSize.width,
+                      maxHeight: GetSize.height - 65,
+                    ),
+                    alignment: Alignment.topCenter,
+                    color: Colors.white,
+                    child: widget.scrollView
+                        ? SingleChildScrollView(
+                            child: widget.screenToShow,
+                          )
+                        : widget.screenToShow,
+                  ),
+                  Container(
+                    constraints: BoxConstraints(
+                      maxWidth: GetSize.width > 500 ? 500 : GetSize.width,
+                    ),
+                    height: 65,
+                    child: BottomNavigationBar(
+                      type: BottomNavigationBarType.fixed,
+                      currentIndex: widget.pageSelected,
+                      onTap: (value) {
+                        switch (value) {
+                          case 0:
+                            Get.toNamed('/home');
+                            break;
+                          case 1:
+                            Get.toNamed('/home');
+                            break;
+                          case 2:
+                            Get.toNamed('/home');
+                            break;
+                          case 3:
+                            Get.toNamed('/config');
+                            break;
+                          default:
+                            Get.toNamed('/home');
+                        }
+                      },
+                      items: [
+                        BottomNavigationBarItem(
+                          icon: const FaIcon(FontAwesomeIcons.house),
+                          label: 'labelHome'.tr,
+                        ),
+                        BottomNavigationBarItem(
+                          icon: const FaIcon(FontAwesomeIcons.box),
+                          label: 'labelProduct'.tr,
+                        ),
+                        BottomNavigationBarItem(
+                          icon: const FaIcon(FontAwesomeIcons.truck),
+                          label: 'labelSupplier'.tr,
+                        ),
+                        BottomNavigationBarItem(
+                          icon: const FaIcon(FontAwesomeIcons.gear),
+                          label: 'labelConfig'.tr,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-              BottomNavigationBarItem(
-                icon: const FaIcon(FontAwesomeIcons.box),
-                label: 'labelProduct'.tr,
-              ),
-              BottomNavigationBarItem(
-                icon: const FaIcon(FontAwesomeIcons.truck),
-                label: 'labelSupplier'.tr,
-              ),
-              BottomNavigationBarItem(
-                icon: const FaIcon(FontAwesomeIcons.gear),
-                label: 'labelConfig'.tr,
-              ),
-            ],
+            ),
           ),
         );
       },
