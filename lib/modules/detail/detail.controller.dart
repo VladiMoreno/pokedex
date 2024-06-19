@@ -10,6 +10,10 @@ class DetailController extends GetxController {
 
   var isLoading = RxBool(false);
 
+  var pokemonInfo = RxMap({});
+  var pokemonSpecieInfo = RxMap({});
+  var pokemonEvolutionInfo = RxMap({});
+
   @override
   void onReady() async {
     try {
@@ -38,8 +42,12 @@ class DetailController extends GetxController {
     required String name,
     required int id,
   }) async {
-    await detailServices.getPokemonInformation(name);
-    await detailServices.getPokemonSpecieInformation(id);
-    await detailServices.getPokemonEvolution(id);
+    final gPI = await detailServices.getPokemonInformation(name);
+    final gPSI = await detailServices.getPokemonSpecieInformation(id);
+    final gPE = await detailServices.getPokemonEvolution(id);
+
+    pokemonInfo.value = gPI;
+    pokemonSpecieInfo.value = gPSI;
+    pokemonEvolutionInfo.value = gPE;
   }
 }

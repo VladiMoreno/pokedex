@@ -30,20 +30,22 @@ class ChainDetailDTO {
 
   factory ChainDetailDTO.fromJson(Map<String, dynamic> json) => ChainDetailDTO(
         species: SpeciesDto.fromJson(json["species"]),
-        evolvesTo: List<EvolvesToDTO>.from(
-            json['evolves_to'].map((value) => EvolvesToDTO.fromJson(value))),
+        evolvesTo: List<EvolvesToDTO>.from((json['evolves_to'] as List)
+            .map((value) => EvolvesToDTO.fromJson(value))),
       );
 
   Map<String, dynamic> toJson() => {
         "species": species.toJson(),
-        "evolvesTo": evolvesTo.map((e) => e.toJson()).toList(),
+        "evolves_to": evolvesTo.map((e) => e.toJson()).toList(),
       };
 }
 
 class SpeciesDto {
   String name;
 
-  SpeciesDto({required this.name});
+  SpeciesDto({
+    required this.name,
+  });
 
   factory SpeciesDto.fromJson(Map<String, dynamic> json) => SpeciesDto(
         name: json["name"],
@@ -67,16 +69,17 @@ class EvolvesToDTO {
 
   factory EvolvesToDTO.fromJson(Map<String, dynamic> json) => EvolvesToDTO(
         species: SpeciesDto.fromJson(json["species"]),
-        evolutionDetails: List<EvolutionDetails>.from(json["evolution_details"]
-            .map((value) => EvolutionDetails.fromJson(value))),
-        evolvesTo: List<EvolvesToDTO>.from(
-            json['evolves_to'].map((value) => EvolvesToDTO.fromJson(value))),
+        evolutionDetails: List<EvolutionDetails>.from(
+            (json["evolution_details"] as List)
+                .map((value) => EvolutionDetails.fromJson(value))),
+        evolvesTo: List<EvolvesToDTO>.from((json['evolves_to'] as List)
+            .map((value) => EvolvesToDTO.fromJson(value))),
       );
 
   Map<String, dynamic> toJson() => {
-        "species": species,
-        "evolutionDetails": evolutionDetails.map((e) => e.toJson()).toList(),
-        "evolvesTo": evolvesTo.map((e) => e.toJson()).toList(),
+        "species": species.toJson(),
+        "evolution_details": evolutionDetails.map((e) => e.toJson()).toList(),
+        "evolves_to": evolvesTo.map((e) => e.toJson()).toList(),
       };
 }
 
@@ -93,6 +96,6 @@ class EvolutionDetails {
       );
 
   Map<String, dynamic> toJson() => {
-        "minLevel": minLevel,
+        "min_level": minLevel,
       };
 }

@@ -27,6 +27,7 @@ class PokemonInformation {
         "id": id,
         "name": name,
         "weight": weight,
+        "base_experience": baseExperience,
         "stats": stats.map((e) => e.toJson()).toList(),
       };
 }
@@ -46,7 +47,7 @@ class StatsInfo {
       );
 
   Map<String, dynamic> toJson() => {
-        "baseStat": baseStat,
+        "base_stat": baseStat,
         "stat": stat.toJson(),
       };
 }
@@ -80,8 +81,8 @@ class SpritesInfo {
       );
 
   Map<String, dynamic> toJson() => {
-        "frontDefault": frontDefault,
-        "frontShiny": frontShiny,
+        "front_default": frontDefault,
+        "front_shiny": frontShiny,
       };
 }
 
@@ -114,7 +115,7 @@ class Showdown {
       );
 
   Map<String, dynamic> toJson() => {
-        "frontDefault": frontDefault,
-        "frontShiny": frontShiny,
+        "front_default": frontDefault,
+        "front_shiny": frontShiny,
       };
 }

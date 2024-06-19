@@ -22,16 +22,18 @@ class PokemonSpeciesDTO {
         eggGroups: List<EggGroupsDTO>.from(
             json["egg_groups"].map((value) => EggGroupsDTO.fromJson(value))),
         generation: GenerationDTO.fromJson(json["generation"]),
-        growthRate: GrowthRateDTO.fromJson(json["growth_rate"]),
+        growthRate: GrowthRateDTO.fromJson(
+          json["growth_rate"] ?? json["growthRate"],
+        ),
         habitat: HabitatDTO.fromJson(json["habitat"]),
       );
 
   Map<String, dynamic> toJson() => {
-        "baseHappiness": baseHappiness,
-        "captureRate": captureRate,
-        "eggGroups": eggGroups.map((e) => e.toJson()).toList(),
+        "base_happiness": baseHappiness,
+        "capture_rate": captureRate,
+        "egg_groups": eggGroups.map((e) => e.toJson()).toList(),
         "generation": generation.toJson(),
-        "growthRate": growthRate.toJson(),
+        "growth_rate": growthRate.toJson(),
         "habitat": habitat.toJson(),
       };
 }
