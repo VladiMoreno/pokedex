@@ -145,7 +145,7 @@ class _HomeViewState extends State<HomeView> {
                                         SizedBox(
                                           width: containerWidth * .4,
                                           child: AutoSizeText(
-                                            pokemons[index].name,
+                                            pokemons[index].name.toUpperCase(),
                                             maxLines: 1,
                                             textAlign: TextAlign.center,
                                             style: const TextStyle(
