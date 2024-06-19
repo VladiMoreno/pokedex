@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pokedex/common/widgets/responsive_wrapper.view.dart';
 import 'package:pokedex/config/states.config.dart';
 import 'package:pokedex/routes/main.route.dart';
-import 'package:pokedex/utils/get_size.util.dart';
 import 'package:pokedex/utils/get_storage.util.dart';
 
 void main() async {
@@ -18,12 +18,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    GetSize.init(context);
-
-    return GetMaterialApp(
-      title: 'Pokedex - Vladimir Moreno',
-      initialRoute: '/home',
-      getPages: AppRoutes.routes,
+    return ResponsiveWrapper(
+      child: GetMaterialApp(
+        title: 'Pokedex - Vladimir Moreno',
+        initialRoute: '/home',
+        getPages: AppRoutes.routes,
+      ),
     );
   }
 }

@@ -24,7 +24,6 @@ class _LayoutViewState extends State<LayoutView> {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        GetSize.init(context);
         return Scaffold(
           body: Column(
             children: [
