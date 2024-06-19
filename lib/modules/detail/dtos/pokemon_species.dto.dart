@@ -19,9 +19,8 @@ class PokemonSpeciesDTO {
       PokemonSpeciesDTO(
         baseHappiness: json["base_happiness"],
         captureRate: json["capture_rate"],
-        eggGroups: json["egg_groups"]
-            .map((value) => EggGroupsDTO.fromJson(value))
-            .toList(),
+        eggGroups: List<EggGroupsDTO>.from(
+            json["egg_groups"].map((value) => EggGroupsDTO.fromJson(value))),
         generation: GenerationDTO.fromJson(json["generation"]),
         growthRate: GrowthRateDTO.fromJson(json["growth_rate"]),
         habitat: HabitatDTO.fromJson(json["habitat"]),

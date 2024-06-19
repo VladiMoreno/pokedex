@@ -82,126 +82,137 @@ class _HomeViewState extends State<HomeView> {
                         runSpacing: 20,
                         spacing: 20,
                         children: List.generate(pokemons.length, (index) {
-                          return Container(
-                            width: containerWidth,
-                            height: containerHeight,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(25),
-                              color: pokemonItem(
-                                pokemons[index].types[0].type.name,
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 5,
-                                  blurRadius: 7,
-                                  offset: const Offset(0, 3),
+                          return InkWell(
+                            onTap: () {
+                              Get.toNamed(
+                                '/detail?id=${pokemons[index].id}&name=${pokemons[index].name}',
+                              );
+                            },
+                            child: Container(
+                              width: containerWidth,
+                              height: containerHeight,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(25),
+                                color: pokemonItem(
+                                  pokemons[index].types[0].type.name,
                                 ),
-                              ],
-                            ),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(15),
-                              child: Stack(
-                                children: [
-                                  Positioned(
-                                    bottom: -15,
-                                    right: -3,
-                                    child: CustomPaint(
-                                      size: const Size(
-                                        containerWidth * .5,
-                                        containerHeight * .8,
-                                      ),
-                                      painter: PokeballLogoPainter(
-                                        color: Colors.white.withOpacity(0.3),
-                                      ),
-                                    ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 5,
+                                    blurRadius: 7,
+                                    offset: const Offset(0, 3),
                                   ),
-                                  Align(
-                                    alignment: Alignment.bottomRight,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          right: 7, bottom: 20),
-                                      child: SizedBox(
-                                        width: containerWidth * .5,
-                                        child: Hero(
-                                          tag:
-                                              "pokemon-image-${pokemons[index].id}",
-                                          child: ImageUtils.networkImage(
-                                            url:
-                                                '$baseImgUrl/${pokemons[index].id}.png',
-                                          ),
+                                ],
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(15),
+                                child: Stack(
+                                  children: [
+                                    Positioned(
+                                      bottom: -15,
+                                      right: -3,
+                                      child: CustomPaint(
+                                        size: const Size(
+                                          containerWidth * .5,
+                                          containerHeight * .8,
+                                        ),
+                                        painter: PokeballLogoPainter(
+                                          color: Colors.white.withOpacity(0.3),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  Container(
-                                    padding: const EdgeInsets.only(left: 16),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        SizedBox(
-                                          width: containerWidth * .4,
-                                          child: AutoSizeText(
-                                            pokemons[index].name.toUpperCase(),
-                                            maxLines: 1,
-                                            textAlign: TextAlign.center,
-                                            style: const TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold,
-                                              decoration: TextDecoration.none,
+                                    Align(
+                                      alignment: Alignment.bottomRight,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            right: 7, bottom: 20),
+                                        child: SizedBox(
+                                          width: containerWidth * .5,
+                                          child: Hero(
+                                            tag:
+                                                "pokemon-image-${pokemons[index].id}",
+                                            child: ImageUtils.networkImage(
+                                              url:
+                                                  '$baseImgUrl/${pokemons[index].id}.png',
                                             ),
                                           ),
                                         ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children:
-                                              pokemons[index].types.map((type) {
-                                            return Padding(
-                                              padding:
-                                                  const EdgeInsets.only(top: 4),
-                                              child: Container(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 15,
-                                                        vertical: 5),
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(38),
-                                                  color: const Color.fromARGB(
-                                                      200, 232, 222, 222),
-                                                ),
-                                                child: SizedBox(
-                                                  child: AutoSizeText(
-                                                    type.type.name,
-                                                    maxLines: 1,
-                                                    minFontSize: 12,
-                                                    maxFontSize: 18,
-                                                    style: const TextStyle(
-                                                      color: Colors.white,
-                                                      decoration:
-                                                          TextDecoration.none,
-                                                      fontWeight:
-                                                          FontWeight.w700,
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: const EdgeInsets.only(left: 16),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          SizedBox(
+                                            width: containerWidth * .4,
+                                            child: AutoSizeText(
+                                              pokemons[index]
+                                                  .name
+                                                  .toUpperCase(),
+                                              maxLines: 1,
+                                              textAlign: TextAlign.center,
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                                decoration: TextDecoration.none,
+                                              ),
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: pokemons[index]
+                                                .types
+                                                .map((type) {
+                                              return Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 4),
+                                                child: Container(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(
+                                                      horizontal: 15,
+                                                      vertical: 5),
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            38),
+                                                    color: const Color.fromARGB(
+                                                        200, 232, 222, 222),
+                                                  ),
+                                                  child: SizedBox(
+                                                    child: AutoSizeText(
+                                                      type.type.name,
+                                                      maxLines: 1,
+                                                      minFontSize: 12,
+                                                      maxFontSize: 18,
+                                                      style: const TextStyle(
+                                                        color: Colors.white,
+                                                        decoration:
+                                                            TextDecoration.none,
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
-                                              ),
-                                            );
-                                          }).toList(),
-                                        )
-                                      ],
+                                              );
+                                            }).toList(),
+                                          )
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                           );

@@ -19,7 +19,8 @@ class PokemonInformation {
         name: json["name"],
         weight: json["weight"],
         baseExperience: json["base_experience"],
-        stats: json['stats'].map((stat) => StatsInfo.fromJson(stat)).toList(),
+        stats: List<StatsInfo>.from(
+            json['stats'].map((stat) => StatsInfo.fromJson(stat))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -31,7 +32,7 @@ class PokemonInformation {
 }
 
 class StatsInfo {
-  String baseStat;
+  int baseStat;
   DetailStat stat;
 
   StatsInfo({

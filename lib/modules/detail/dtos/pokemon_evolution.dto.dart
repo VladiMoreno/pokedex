@@ -30,9 +30,8 @@ class ChainDetailDTO {
 
   factory ChainDetailDTO.fromJson(Map<String, dynamic> json) => ChainDetailDTO(
         species: SpeciesDto.fromJson(json["species"]),
-        evolvesTo: json['evolves_to']
-            .map((value) => EvolvesToDTO.fromJson(value))
-            .toList(),
+        evolvesTo: List<EvolvesToDTO>.from(
+            json['evolves_to'].map((value) => EvolvesToDTO.fromJson(value))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -68,12 +67,10 @@ class EvolvesToDTO {
 
   factory EvolvesToDTO.fromJson(Map<String, dynamic> json) => EvolvesToDTO(
         species: SpeciesDto.fromJson(json["species"]),
-        evolutionDetails: json["evolution_details"]
-            .map((value) => EvolutionDetails.fromJson(value))
-            .toList(),
-        evolvesTo: json['evolves_to']
-            .map((value) => EvolvesToDTO.fromJson(value))
-            .toList(),
+        evolutionDetails: List<EvolutionDetails>.from(json["evolution_details"]
+            .map((value) => EvolutionDetails.fromJson(value))),
+        evolvesTo: List<EvolvesToDTO>.from(
+            json['evolves_to'].map((value) => EvolvesToDTO.fromJson(value))),
       );
 
   Map<String, dynamic> toJson() => {
