@@ -6,11 +6,13 @@ import 'package:pokedex/utils/get_size.util.dart';
 class LayoutView extends StatefulWidget {
   final Widget screenToShow;
   final int pageSelected;
+  final bool scrollView;
 
   const LayoutView({
     super.key,
     required this.screenToShow,
     this.pageSelected = 0,
+    this.scrollView = true,
   });
 
   @override
@@ -22,17 +24,20 @@ class _LayoutViewState extends State<LayoutView> {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
+        GetSize.init(context);
         return Scaffold(
           body: Column(
             children: [
               Container(
                 constraints: BoxConstraints(
                   maxWidth: GetSize.width,
-                  maxHeight: GetSize.height - 60,
+                  maxHeight: GetSize.height - 65,
                 ),
-                child: SingleChildScrollView(
-                  child: widget.screenToShow,
-                ),
+                child: widget.scrollView
+                    ? SingleChildScrollView(
+                        child: widget.screenToShow,
+                      )
+                    : widget.screenToShow,
               ),
             ],
           ),
