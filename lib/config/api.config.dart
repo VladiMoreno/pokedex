@@ -30,6 +30,8 @@ class APIService {
               .then((value) => value.data);
         case 'DELETE':
           return await dio.delete('$baseUrl$path').then((value) => value.data);
+        case 'GET_FULL_URL':
+          return await dio.get(path).then((value) => value.data);
         default:
           throw Exception('Método HTTP no válido: $method');
       }
@@ -68,4 +70,7 @@ class APIService {
   Function(String path, {dynamic data}) get put => generateFunction('PUT');
   Function(String path, {dynamic data}) get delete =>
       generateFunction('DELETE');
+
+  Function(String path, {dynamic data}) get getFullURL =>
+      generateFunction('GET_FULL_URL');
 }
