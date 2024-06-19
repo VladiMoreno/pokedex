@@ -1,9 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokedex/common/colors.style.dart';
-import 'package:pokedex/common/layout.view.dart';
-import 'package:pokedex/common/white_pokeball.style.dart';
+import 'package:pokedex/common/styles/loading.view.dart';
+import 'package:pokedex/common/widgets/colors.style.dart';
+import 'package:pokedex/common/styles/layout.view.dart';
+import 'package:pokedex/common/widgets/white_pokeball.style.dart';
 import 'package:pokedex/config/env.config.dart';
 import 'package:pokedex/utils/image.util.dart';
 
@@ -49,7 +50,7 @@ class _HomeViewState extends State<HomeView> {
 
     return Obx(() {
       if (widget.controller.isLoading.isTrue && data.isEmpty) {
-        return const Center(child: CircularProgressIndicator());
+        return const LoadingView();
       }
 
       List<ResultsDTO> pokemons =
@@ -179,11 +180,7 @@ class _HomeViewState extends State<HomeView> {
                     }),
                   ),
                 ),
-                if (widget.controller.isLoading.isTrue)
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: CircularProgressIndicator(),
-                  ),
+                if (widget.controller.isLoading.isTrue) const LoadingView()
               ],
             ),
           ),
