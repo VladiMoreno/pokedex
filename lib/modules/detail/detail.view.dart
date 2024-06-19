@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import 'detail.controller.dart';
 
 class DetailView extends StatefulWidget {
-  const DetailView({super.key});
+  DetailView({super.key});
+
+  final DetailController controller = Get.put(DetailController());
 
   @override
   State<DetailView> createState() => _DetailViewState();
