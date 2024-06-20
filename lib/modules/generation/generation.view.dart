@@ -51,7 +51,9 @@ class _GenerationViewState extends State<GenerationView> {
                   generations.length,
                   (index) {
                     return InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Get.toNamed('/generation/${index + 1}');
+                      },
                       child: Container(
                         width: containerWidth,
                         height: containerHeight,
