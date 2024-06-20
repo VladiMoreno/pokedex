@@ -7,7 +7,7 @@ import 'generation.dto.dart';
 class GenerationService extends GetxService {
   Future getGenerations() async {
     try {
-      await Future.delayed(const Duration(milliseconds: 200));
+      await Future.delayed(const Duration(seconds: 1));
 
       final response = imageGeneration;
 

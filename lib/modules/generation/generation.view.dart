@@ -4,6 +4,7 @@ import 'package:pokedex/common/styles/white_pokeball.style.dart';
 import 'package:pokedex/common/widgets/layout.view.dart';
 import 'package:pokedex/common/widgets/loading.view.dart';
 import 'package:pokedex/utils/get_size.util.dart';
+import 'package:pokedex/utils/image.util.dart';
 
 import 'generation.controller.dart';
 import 'generation.dto.dart';
@@ -21,7 +22,7 @@ class _GenerationViewState extends State<GenerationView> {
   @override
   Widget build(BuildContext context) {
     double containerWidth = GetSize.width * .8;
-    double containerHeight = containerWidth * .6;
+    double containerHeight = containerWidth * .5;
 
     List data = widget.controller.generationsInfo;
 
@@ -36,13 +37,13 @@ class _GenerationViewState extends State<GenerationView> {
               data.map((e) => GenerationDTO.fromJson(e)).toList();
 
           return LayoutView(
-            scrollView: false,
+            pageSelected: 1,
             screenToShow: Container(
               constraints: BoxConstraints(
                 maxWidth: GetSize.width,
                 minHeight: GetSize.height,
               ),
-              margin: const EdgeInsets.only(top: 25),
+              margin: const EdgeInsets.symmetric(vertical: 50),
               child: Wrap(
                 runSpacing: 20,
                 spacing: 20,
@@ -54,6 +55,7 @@ class _GenerationViewState extends State<GenerationView> {
                       child: Container(
                         width: containerWidth,
                         height: containerHeight,
+                        margin: const EdgeInsets.symmetric(horizontal: 10),
                         decoration: BoxDecoration(
                           boxShadow: [
                             BoxShadow(
@@ -63,9 +65,10 @@ class _GenerationViewState extends State<GenerationView> {
                               offset: const Offset(0, 3),
                             ),
                           ],
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15),
                         ),
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(15),
                           child: Stack(
                             children: [
                               Positioned(
@@ -73,11 +76,47 @@ class _GenerationViewState extends State<GenerationView> {
                                 right: -3,
                                 child: CustomPaint(
                                   size: Size(
-                                    containerWidth * .5,
-                                    containerHeight * .8,
+                                    containerWidth * .35,
+                                    containerHeight * .7,
                                   ),
                                   painter: PokeballLogoPainter(
-                                    color: Colors.white.withOpacity(0.3),
+                                    color: Colors.grey.withOpacity(0.3),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                width: containerWidth - 20,
+                                margin: EdgeInsets.only(
+                                  top: containerHeight * .12,
+                                ),
+                                child: Text(
+                                  generations[index].name,
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                    fontSize: 24,
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                width: containerWidth,
+                                margin: EdgeInsets.only(
+                                  top: containerHeight * .18,
+                                ),
+                                alignment: Alignment.center,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: List.generate(
+                                    generations[index].images.length,
+                                    (indexImage) {
+                                      final img =
+                                          generations[index].images[indexImage];
+
+                                      return ImageUtils.networkImage(
+                                        url: img.url,
+                                        width: containerWidth * .3,
+                                      );
+                                    },
                                   ),
                                 ),
                               ),

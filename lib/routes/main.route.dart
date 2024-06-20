@@ -1,10 +1,12 @@
 import 'package:get/get.dart';
 import 'package:pokedex/modules/detail/detail.view.dart';
+import 'package:pokedex/modules/generation/generation.view.dart';
 import 'package:pokedex/modules/home/home.view.dart';
 
 class AppRoutes {
   static const home = '/home';
   static const detail = '/detail';
+  static const generation = '/generation';
 
   static List<GetPage> routes = [
     GetPage(
@@ -14,6 +16,10 @@ class AppRoutes {
     GetPage(
       name: detail,
       page: () => DetailView(),
+    ),
+    GetPage(
+      name: generation,
+      page: () => GenerationView(),
     ),
   ];
 }
