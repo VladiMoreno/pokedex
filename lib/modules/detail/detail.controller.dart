@@ -43,7 +43,9 @@ class DetailController extends GetxController {
   }) async {
     final gPI = await detailServices.getPokemonInformation(name);
     final gPSI = await detailServices.getPokemonSpecieInformation(id);
-    final gPE = await detailServices.getPokemonEvolution(id);
+    final gPE = await detailServices.getPokemonEvolution(
+      gPSI['evolution_chain']['url'],
+    );
 
     pokemonInfo.value = gPI;
     pokemonSpecieInfo.value = gPSI;

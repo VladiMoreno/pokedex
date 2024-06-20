@@ -1,6 +1,7 @@
 class PokemonSpeciesDTO {
   int baseHappiness;
   int captureRate;
+  EvolutionChain evolutionChain;
   List<EggGroupsDTO> eggGroups;
   GenerationDTO generation;
   GrowthRateDTO growthRate;
@@ -9,6 +10,7 @@ class PokemonSpeciesDTO {
   PokemonSpeciesDTO({
     required this.baseHappiness,
     required this.captureRate,
+    required this.evolutionChain,
     required this.eggGroups,
     required this.generation,
     required this.growthRate,
@@ -19,6 +21,7 @@ class PokemonSpeciesDTO {
       PokemonSpeciesDTO(
         baseHappiness: json["base_happiness"],
         captureRate: json["capture_rate"],
+        evolutionChain: EvolutionChain.fromJson(json['evolution_chain']),
         eggGroups: List<EggGroupsDTO>.from(
             json["egg_groups"].map((value) => EggGroupsDTO.fromJson(value))),
         generation: GenerationDTO.fromJson(json["generation"]),
@@ -31,6 +34,7 @@ class PokemonSpeciesDTO {
   Map<String, dynamic> toJson() => {
         "base_happiness": baseHappiness,
         "capture_rate": captureRate,
+        "evolution_chain": evolutionChain.toJson(),
         "egg_groups": eggGroups.map((e) => e.toJson()).toList(),
         "generation": generation.toJson(),
         "growth_rate": growthRate.toJson(),
@@ -91,5 +95,19 @@ class HabitatDTO {
 
   Map<String, dynamic> toJson() => {
         "name": name,
+      };
+}
+
+class EvolutionChain {
+  String url;
+
+  EvolutionChain({required this.url});
+
+  factory EvolutionChain.fromJson(Map<String, dynamic> json) => EvolutionChain(
+        url: json["url"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "url": url,
       };
 }
