@@ -2,15 +2,21 @@ class PokemonInformation {
   int id;
   String name;
   int weight;
+  int height;
   int baseExperience;
   List<StatsInfo> stats;
+  List<TypesDTO> types;
+  List<AbilitiesDTO> abilities;
 
   PokemonInformation({
     required this.id,
     required this.name,
     required this.weight,
+    required this.height,
     required this.baseExperience,
     required this.stats,
+    required this.types,
+    required this.abilities,
   });
 
   factory PokemonInformation.fromJson(Map<String, dynamic> json) =>
@@ -18,17 +24,25 @@ class PokemonInformation {
         id: json["id"],
         name: json["name"],
         weight: json["weight"],
+        height: json["height"],
         baseExperience: json["base_experience"],
         stats: List<StatsInfo>.from(
             json['stats'].map((stat) => StatsInfo.fromJson(stat))),
+        types: List<TypesDTO>.from(
+            json['types'].map((stat) => TypesDTO.fromJson(stat))),
+        abilities: List<AbilitiesDTO>.from(json['abilities']
+            .map((abilitie) => AbilitiesDTO.fromJson(abilitie))),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
         "weight": weight,
+        "height": height,
         "base_experience": baseExperience,
         "stats": stats.map((e) => e.toJson()).toList(),
+        "types": types.map((e) => e.toJson()).toList(),
+        "abilities": abilities.map((e) => e.toJson()).toList(),
       };
 }
 
@@ -117,5 +131,86 @@ class Showdown {
   Map<String, dynamic> toJson() => {
         "front_default": frontDefault,
         "front_shiny": frontShiny,
+      };
+}
+
+class TypesDTO {
+  int slot;
+  TypeDTO type;
+
+  TypesDTO({
+    required this.slot,
+    required this.type,
+  });
+
+  factory TypesDTO.fromJson(Map<String, dynamic> json) => TypesDTO(
+        slot: json["slot"],
+        type: TypeDTO.fromJson(json['type']),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "slot": slot,
+        "type": type.toJson(),
+      };
+}
+
+class TypeDTO {
+  String name;
+  String url;
+
+  TypeDTO({
+    required this.name,
+    required this.url,
+  });
+
+  factory TypeDTO.fromJson(Map<String, dynamic> json) => TypeDTO(
+        name: json["name"],
+        url: json["url"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "name": name,
+        "url": url,
+      };
+}
+
+class AbilitiesDTO {
+  int slot;
+  DetailAbilitiesDTO ability;
+
+  AbilitiesDTO({
+    required this.slot,
+    required this.ability,
+  });
+
+  factory AbilitiesDTO.fromJson(Map<String, dynamic> json) => AbilitiesDTO(
+        slot: json["slot"],
+        ability: DetailAbilitiesDTO.fromJson(json["ability"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "slot": slot,
+        "ability": ability.toJson(),
+      };
+}
+
+class DetailAbilitiesDTO {
+  String name;
+  String url;
+
+  DetailAbilitiesDTO({
+    required this.name,
+    required this.url,
+  });
+
+  factory DetailAbilitiesDTO.fromJson(Map<String, dynamic> json) =>
+      DetailAbilitiesDTO(
+        name: json["name"],
+        url: json["url"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "name": name,
+        "url": url,
       };
 }

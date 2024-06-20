@@ -42,17 +42,44 @@ class ChainDetailDTO {
 
 class SpeciesDto {
   String name;
+  int id;
+  int minLevel; // New attribute to handle min_level
 
   SpeciesDto({
     required this.name,
+    required this.id,
+    this.minLevel = 0, // Default to 0 if not provided
   });
 
-  factory SpeciesDto.fromJson(Map<String, dynamic> json) => SpeciesDto(
-        name: json["name"],
+  factory SpeciesDto.fromJson(Map<String, dynamic> json) {
+    int lastNumberInt = 0;
+
+    if (json['url'] != null) {
+      List<String> parts = json['url'].split('/');
+      String? lastNumber = parts.lastWhere(
+        (element) => element.isNotEmpty,
+        orElse: () => "",
       );
+      lastNumberInt = int.parse(lastNumber);
+    }
+
+    int minLevel = json['evolution_details'] != null &&
+            json['evolution_details'].isNotEmpty &&
+            json['evolution_details'][0]['min_level'] != null
+        ? json['evolution_details'][0]['min_level']
+        : 0; // Default to 0 if min_level is not specified
+
+    return SpeciesDto(
+      name: json["name"],
+      id: json['id'] ?? lastNumberInt,
+      minLevel: minLevel,
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         "name": name,
+        "id": id,
+        "min_level": minLevel,
       };
 }
 
@@ -90,10 +117,11 @@ class EvolutionDetails {
     required this.minLevel,
   });
 
-  factory EvolutionDetails.fromJson(Map<String, dynamic> json) =>
-      EvolutionDetails(
-        minLevel: json["min_level"],
-      );
+  factory EvolutionDetails.fromJson(Map<String, dynamic> json) {
+    return EvolutionDetails(
+      minLevel: json["min_level"] ?? 0,
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         "min_level": minLevel,
