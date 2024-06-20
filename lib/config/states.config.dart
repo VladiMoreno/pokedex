@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:pokedex/states/home.state.dart';
 
 class AppStates {
   final GetIt locator = GetIt.instance;
@@ -11,12 +12,12 @@ class AppStates {
   AppStates._internal();
 
   init() {
-    //locator.registerSingleton<ClassState>(ClassState());
+    locator.registerSingleton<HomeState>(HomeState());
   }
 
   reset() {
-    //variableState.reset();
+    homeState.reset();
   }
 
-  //ClassState get variableState => locator<ClassState>();
+  HomeState get homeState => locator<HomeState>();
 }
