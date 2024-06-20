@@ -33,23 +33,31 @@ class PokemonGenerationController extends GetxController {
   }
 
   Future getPokemonsByGeneration({required int id}) async {
-    final response = await service.getPokemonsByGeneration(id);
+    try {
+      isLoading.value = true;
 
-    total.value = response['total'];
-    pokemonsGeneralInfo.value = response['data'];
+      final response = await service.getPokemonsByGeneration(id);
 
-    List<String> pokemonNames = [];
+      total.value = response['total'];
+      pokemonsGeneralInfo.value = response['data']['pokemon_species'];
 
-    for (var i = initialValue.value; i < (page.value * 5); i++) {
-      pokemonNames.add(response['data']['pokemonSpecies'][i]['name']);
+      List<String> pokemonNames = [];
+
+      for (var i = initialValue.value; i < (page.value * 5); i++) {
+        pokemonNames.add(response['data']['pokemon_species'][i]['name']);
+      }
+
+      initialValue.value = page.value * 5;
+
+      page.value += 1;
+
+      final pokemons = await service.getPokemonsInfo(pokemonNames);
+
+      pokemonsInfo.addAll(pokemons);
+    } catch (e) {
+      isLoading.value = false;
+    } finally {
+      isLoading.value = false;
     }
-
-    initialValue.value = page.value * 5;
-
-    page.value += 1;
-
-    final pokemons = await service.getPokemonsInfo(pokemonNames);
-
-    pokemonsInfo.addAll(pokemons);
   }
 }

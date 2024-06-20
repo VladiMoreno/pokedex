@@ -58,7 +58,7 @@ class PokemonGenerationService extends GetxService {
     } catch (e) {
       printMessageParam(
         message:
-            'Error en la función getPokemonsByGeneration del archivo pokemon_generation.service',
+            'Error en la función getPokemonsInfo del archivo pokemon_generation.service',
         param: e,
       );
       rethrow;

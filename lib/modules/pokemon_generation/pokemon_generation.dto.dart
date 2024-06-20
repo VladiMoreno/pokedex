@@ -20,7 +20,7 @@ class GenerationDto {
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "pokemonSpecies": pokemonSpecies.map((e) => e.toJson()).toList(),
+        "pokemon_species": pokemonSpecies.map((e) => e.toJson()).toList(),
       };
 }
 
