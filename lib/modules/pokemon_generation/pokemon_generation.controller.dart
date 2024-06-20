@@ -60,4 +60,30 @@ class PokemonGenerationController extends GetxController {
       isLoading.value = false;
     }
   }
+
+  Future getPokemonsPagintaion() async {
+    try {
+      isLoading.value = true;
+
+      List info = pokemonsGeneralInfo;
+
+      List<String> pokemonNames = [];
+
+      for (var i = initialValue.value; i < (page.value * 5); i++) {
+        pokemonNames.add(info[i]['name']);
+      }
+
+      initialValue.value = page.value * 5;
+
+      page.value += 1;
+
+      final pokemons = await service.getPokemonsInfo(pokemonNames);
+
+      pokemonsInfo.addAll(pokemons);
+    } catch (e) {
+      isLoading.value = false;
+    } finally {
+      isLoading.value = false;
+    }
+  }
 }

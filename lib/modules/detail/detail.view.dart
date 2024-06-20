@@ -102,7 +102,7 @@ class _DetailViewState extends State<DetailView> with TickerProviderStateMixin {
                   ),
                   child: InkWell(
                     onTap: () {
-                      Get.toNamed('/home');
+                      Get.back();
                     },
                     child: const FaIcon(
                       FontAwesomeIcons.arrowLeft,
