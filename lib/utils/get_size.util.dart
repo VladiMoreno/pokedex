@@ -5,7 +5,13 @@ class GetSize {
   static late double height;
 
   static void init(BuildContext context) {
-    width = MediaQuery.of(context).size.width;
+    double widthSize = MediaQuery.of(context).size.width;
     height = MediaQuery.of(context).size.height;
+
+    if (widthSize > 500) {
+      width = 500;
+    } else {
+      width = widthSize;
+    }
   }
 }
