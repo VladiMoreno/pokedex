@@ -63,34 +63,20 @@ class _LayoutViewState extends State<LayoutView> {
                             Get.toNamed('/home');
                             break;
                           case 1:
-                            Get.toNamed('/home');
-                            break;
-                          case 2:
-                            Get.toNamed('/home');
-                            break;
-                          case 3:
-                            Get.toNamed('/config');
+                            Get.toNamed('/generation');
                             break;
                           default:
                             Get.toNamed('/home');
                         }
                       },
-                      items: [
+                      items: const [
                         BottomNavigationBarItem(
-                          icon: const FaIcon(FontAwesomeIcons.house),
-                          label: 'labelHome'.tr,
+                          icon: FaIcon(FontAwesomeIcons.house),
+                          label: 'Home',
                         ),
                         BottomNavigationBarItem(
-                          icon: const FaIcon(FontAwesomeIcons.box),
-                          label: 'labelProduct'.tr,
-                        ),
-                        BottomNavigationBarItem(
-                          icon: const FaIcon(FontAwesomeIcons.truck),
-                          label: 'labelSupplier'.tr,
-                        ),
-                        BottomNavigationBarItem(
-                          icon: const FaIcon(FontAwesomeIcons.gear),
-                          label: 'labelConfig'.tr,
+                          icon: FaIcon(FontAwesomeIcons.clockRotateLeft),
+                          label: 'All Generations',
                         ),
                       ],
                     ),
