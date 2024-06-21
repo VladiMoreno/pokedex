@@ -8,8 +8,8 @@ import 'package:pokedex/common/widgets/layout.view.dart';
 import 'package:pokedex/common/widgets/loading.view.dart';
 import 'package:pokedex/config/env.config.dart';
 import 'package:pokedex/modules/home/home.dto.dart';
-import 'package:pokedex/utils/get_generation_name.util.dart';
 import 'package:pokedex/utils/get_size.util.dart';
+import 'package:pokedex/utils/get_type_name.util.dart';
 import 'package:pokedex/utils/image.util.dart';
 
 import 'pokemon_type.controller.dart';
@@ -110,7 +110,7 @@ class _PokemonTypeViewState extends State<PokemonTypeView> {
                   ),
                   Center(
                     child: Text(
-                      getGenerationName(int.parse(widget.controller.id!)),
+                      "${getTypeName(int.parse(widget.controller.id!))} TYPE",
                       style: const TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 32,
