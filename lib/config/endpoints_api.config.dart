@@ -6,3 +6,4 @@ const getPokemonSpecieInfo = 'pokemon-species/{pokemon_id}';
 const getEvolutionInfo = 'evolution-chain/{pokemon_id}';
 const getPokemonsByGenerationInfo = 'generation/{generation}/';
 const getTypesOfPokemonsInfo = 'type';
+const getPokemonsByTypeInfo = 'type/{generation}/';
