@@ -38,6 +38,8 @@ Color pokemonItem(String type) {
       return const Color(0xFFB8B8D0);
     case 'fairy':
       return const Color(0xFFA890F0);
+    case 'stellar':
+      return const Color.fromARGB(255, 72, 234, 255);
     default:
       return Colors.grey;
   }

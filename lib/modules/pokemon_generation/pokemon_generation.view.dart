@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:pokedex/common/styles/colors.style.dart';
+import 'package:pokedex/common/styles/pokemon_item.style.dart';
 import 'package:pokedex/common/styles/white_pokeball.style.dart';
 import 'package:pokedex/common/widgets/layout.view.dart';
 import 'package:pokedex/common/widgets/loading.view.dart';
