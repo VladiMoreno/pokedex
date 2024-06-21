@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:pokedex/utils/catch_error.util.dart';
 
 import 'generation.service.dart';
 
@@ -20,6 +21,9 @@ class GeneartionController extends GetxController {
       super.onReady();
     } catch (e) {
       isLoading.value = false;
+      CatchErrorManagement(
+        error: e,
+      );
     } finally {
       isLoading.value = false;
     }

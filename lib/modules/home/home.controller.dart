@@ -1,6 +1,7 @@
 import 'package:get/state_manager.dart';
 import 'package:pokedex/config/states.config.dart';
 import 'package:pokedex/constants/actions_state.constants.dart';
+import 'package:pokedex/utils/catch_error.util.dart';
 
 import 'home.services.dart';
 
@@ -29,6 +30,9 @@ class HomeController extends GetxController {
       super.onReady();
     } catch (e) {
       isLoading.value = false;
+      CatchErrorManagement(
+        error: e,
+      );
     } finally {
       AppStates().homeState.action(initialize, []);
       isLoading.value = false;
@@ -53,6 +57,9 @@ class HomeController extends GetxController {
       page.value = newPage;
     } catch (e) {
       isLoading.value = false;
+      CatchErrorManagement(
+        error: e,
+      );
     } finally {
       isLoading.value = false;
     }

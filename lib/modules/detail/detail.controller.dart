@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:pokedex/config/states.config.dart';
 import 'package:pokedex/constants/actions_state.constants.dart';
+import 'package:pokedex/utils/catch_error.util.dart';
 
 import 'detail.services.dart';
 
@@ -42,6 +43,9 @@ class DetailController extends GetxController {
       super.onReady();
     } catch (e) {
       isLoading.value = false;
+      CatchErrorManagement(
+        error: e,
+      );
     } finally {
       AppStates().detailState.action(initialize, []);
       isLoading.value = false;
