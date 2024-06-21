@@ -17,19 +17,21 @@ class PokemonSpeciesDTO {
     required this.habitat,
   });
 
-  factory PokemonSpeciesDTO.fromJson(Map<String, dynamic> json) =>
-      PokemonSpeciesDTO(
-        baseHappiness: json["base_happiness"],
-        captureRate: json["capture_rate"],
-        evolutionChain: EvolutionChain.fromJson(json['evolution_chain']),
-        eggGroups: List<EggGroupsDTO>.from(
-            json["egg_groups"].map((value) => EggGroupsDTO.fromJson(value))),
-        generation: GenerationDTO.fromJson(json["generation"]),
-        growthRate: GrowthRateDTO.fromJson(
-          json["growth_rate"] ?? json["growthRate"],
-        ),
-        habitat: HabitatDTO.fromJson(json["habitat"]),
-      );
+  factory PokemonSpeciesDTO.fromJson(Map<String, dynamic> json) {
+    final habitatDefault = {"name": "Unknown"};
+    return PokemonSpeciesDTO(
+      baseHappiness: json["base_happiness"],
+      captureRate: json["capture_rate"],
+      evolutionChain: EvolutionChain.fromJson(json['evolution_chain']),
+      eggGroups: List<EggGroupsDTO>.from(
+          json["egg_groups"].map((value) => EggGroupsDTO.fromJson(value))),
+      generation: GenerationDTO.fromJson(json["generation"]),
+      growthRate: GrowthRateDTO.fromJson(
+        json["growth_rate"] ?? json["growthRate"],
+      ),
+      habitat: HabitatDTO.fromJson(json["habitat"] ?? habitatDefault),
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         "base_happiness": baseHappiness,

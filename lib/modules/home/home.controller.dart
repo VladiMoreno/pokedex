@@ -1,4 +1,4 @@
-import 'package:get/state_manager.dart';
+import 'package:get/get.dart';
 import 'package:pokedex/config/states.config.dart';
 import 'package:pokedex/constants/actions_state.constants.dart';
 import 'package:pokedex/utils/catch_error.util.dart';
@@ -32,6 +32,9 @@ class HomeController extends GetxController {
       isLoading.value = false;
       CatchErrorManagement(
         error: e,
+        function: () {
+          Get.offNamed('/home');
+        },
       );
     } finally {
       AppStates().homeState.action(initialize, []);

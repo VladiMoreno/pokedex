@@ -11,6 +11,12 @@ class ImageUtils {
         height: height,
         width: width,
         color: color,
+        errorBuilder: (context, error, stackTrace) {
+          return Image.asset(
+            'assets/gifs/pokeball.gif',
+            width: 100,
+          );
+        },
       );
     }
 
@@ -19,6 +25,12 @@ class ImageUtils {
       height: height,
       width: width,
       color: color,
+      errorWidget: (context, error, stackTrace) {
+        return Image.asset(
+          'assets/gifs/pokeball.gif',
+          width: width,
+        );
+      },
     );
   }
 }

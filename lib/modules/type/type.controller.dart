@@ -23,6 +23,9 @@ class TypeController extends GetxController {
       isLoading.value = false;
       CatchErrorManagement(
         error: e,
+        function: () {
+          Get.offNamed('/home');
+        },
       );
     } finally {
       isLoading.value = false;

@@ -68,6 +68,7 @@ class _HomeViewState extends State<HomeView> {
                 controller: scrollController,
                 child: Column(
                   children: [
+                    const SizedBox(height: 20),
                     Center(
                       child: Image.asset(
                         'assets/images/pokemon_logo.png',
