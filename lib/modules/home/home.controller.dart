@@ -1,4 +1,6 @@
 import 'package:get/state_manager.dart';
+import 'package:pokedex/config/states.config.dart';
+import 'package:pokedex/constants/actions_state.constants.dart';
 
 import 'home.services.dart';
 
@@ -14,14 +16,21 @@ class HomeController extends GetxController {
     try {
       isLoading.value = true;
 
-      final response = await service.getPokemons();
+      if (!AppStates().homeState.isInitialized) {
+        final response = await service.getPokemons();
 
-      pokemonsInfo.value = response;
+        AppStates().homeState.action(set, response);
+
+        pokemonsInfo.value = response;
+      } else {
+        pokemonsInfo.value = AppStates().homeState.info;
+      }
 
       super.onReady();
     } catch (e) {
       isLoading.value = false;
     } finally {
+      AppStates().homeState.action(initialize, []);
       isLoading.value = false;
     }
   }
@@ -36,6 +45,8 @@ class HomeController extends GetxController {
       );
 
       pokemonsInfo.addAll(response);
+
+      AppStates().homeState.action(add, response);
 
       int newPage = page.value + 1;
 

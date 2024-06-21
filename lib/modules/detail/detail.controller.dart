@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:pokedex/config/states.config.dart';
+import 'package:pokedex/constants/actions_state.constants.dart';
 
 import 'detail.services.dart';
 
@@ -27,12 +29,21 @@ class DetailController extends GetxController {
         throw Exception('Verifica el Name del pokemon por favor');
       }
 
-      await getPokemonInformation(name: name!, id: int.parse(id!));
+      Map? info = AppStates().detailState.info[id];
+
+      if (info != null) {
+        pokemonInfo.value = info["pokemonInfo"];
+        pokemonSpecieInfo.value = info["pokemonSpecieInfo"];
+        pokemonEvolutionInfo.value = info["pokemonEvolutionInfo"];
+      } else {
+        await getPokemonInformation(name: name!, id: int.parse(id!));
+      }
 
       super.onReady();
     } catch (e) {
       isLoading.value = false;
     } finally {
+      AppStates().detailState.action(initialize, []);
       isLoading.value = false;
     }
   }
@@ -46,6 +57,15 @@ class DetailController extends GetxController {
     final gPE = await detailServices.getPokemonEvolution(
       gPSI['evolution_chain']['url'],
     );
+
+    final data = {
+      "id": id,
+      "pokemonInfo": gPI,
+      "pokemonSpecieInfo": gPSI,
+      "pokemonEvolutionInfo": gPE,
+    };
+
+    AppStates().detailState.action(add, data);
 
     pokemonInfo.value = gPI;
     pokemonSpecieInfo.value = gPSI;
