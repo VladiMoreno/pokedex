@@ -279,8 +279,8 @@ class AboutInfoView extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                        Wrap(
+                          alignment: WrapAlignment.center,
                           children: List<Widget>.generate(
                             pokemonInfo.abilities.length,
                             (index) {

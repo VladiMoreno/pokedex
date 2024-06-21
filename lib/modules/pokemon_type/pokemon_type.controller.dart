@@ -61,7 +61,7 @@ class PokemonTypeController extends GetxController {
       List<String> pokemonNames = [];
 
       for (var i = initialValue.value; i < (page.value * 5); i++) {
-        pokemonNames.add(response['data']['pokemon'][i]['name']);
+        pokemonNames.add(response["data"]["pokemon"][i]["pokemon"]["name"]);
       }
 
       initialValue.value = page.value * 5;
@@ -97,7 +97,7 @@ class PokemonTypeController extends GetxController {
       List<String> pokemonNames = [];
 
       for (var i = initialValue.value; i < (page.value * 5); i++) {
-        pokemonNames.add(info[i]['name']);
+        pokemonNames.add(info[i]["pokemon"]["name"]);
       }
 
       initialValue.value = page.value * 5;

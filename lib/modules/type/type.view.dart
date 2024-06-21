@@ -53,7 +53,7 @@ class _TypeViewState extends State<TypeView> {
                   (index) {
                     return InkWell(
                       onTap: () {
-                        Get.toNamed('/generation/${index + 1}');
+                        Get.toNamed('/type/${index + 1}');
                       },
                       child: Container(
                         width: containerWidth,

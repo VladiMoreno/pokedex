@@ -23,7 +23,7 @@ class PokemonTypeState {
         if (!pokemonsTypeInfo.containsKey(id)) {
           pokemonsTypeInfo[id] = [];
         }
-        pokemonsTypeInfo[id].addAll(data["pokemon_species"]);
+        pokemonsTypeInfo[id].addAll(data["pokemon"]);
 
         if (!pokemonsInfo.containsKey(id)) {
           pokemonsInfo[id] = [];
