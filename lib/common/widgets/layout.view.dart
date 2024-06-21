@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -40,7 +41,8 @@ class _LayoutViewState extends State<LayoutView> {
                     Container(
                       constraints: BoxConstraints(
                         maxWidth: GetSize.width,
-                        maxHeight: GetSize.height - 100,
+                        maxHeight:
+                            kIsWeb ? GetSize.height - 65 : GetSize.height - 100,
                       ),
                       alignment: Alignment.topCenter,
                       color: Colors.white,
