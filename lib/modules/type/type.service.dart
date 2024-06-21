@@ -12,8 +12,9 @@ class TypeService extends GetxService {
     try {
       final response = await apiService.get(getTypesOfPokemonsInfo);
 
-      List<TypeDTO> listTypeDTO =
-          response["results"].map((e) => TypeDTO.fromJson(e)).toList();
+      List<TypeDTO> listTypeDTO = (response["results"] as List)
+          .map((e) => TypeDTO.fromJson(e as Map<String, dynamic>))
+          .toList();
 
       return listTypeDTO.map((e) => e.toJson()).toList();
     } catch (e) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pokedex/common/styles/pokemon_item.style.dart';
 import 'package:pokedex/common/styles/white_pokeball.style.dart';
 import 'package:pokedex/common/widgets/layout.view.dart';
 import 'package:pokedex/common/widgets/loading.view.dart';
@@ -37,7 +38,7 @@ class _TypeViewState extends State<TypeView> {
           List<TypeDTO> types = data.map((e) => TypeDTO.fromJson(e)).toList();
 
           return LayoutView(
-            pageSelected: 1,
+            pageSelected: 2,
             screenToShow: Container(
               constraints: BoxConstraints(
                 maxWidth: GetSize.width,
@@ -67,12 +68,25 @@ class _TypeViewState extends State<TypeView> {
                               offset: const Offset(0, 3),
                             ),
                           ],
-                          color: Colors.white,
+                          color: pokemonItem(types[index].name),
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: ClipRRect(
                           child: Stack(
                             children: [
+                              Positioned(
+                                top: -75,
+                                left: -55,
+                                child: CustomPaint(
+                                  size: Size(
+                                    containerWidth * .35,
+                                    containerHeight * .7,
+                                  ),
+                                  painter: const PokeballLogoPainter(
+                                    color: Color.fromARGB(100, 105, 105, 105),
+                                  ),
+                                ),
+                              ),
                               Positioned(
                                 bottom: -15,
                                 right: -3,
@@ -81,8 +95,8 @@ class _TypeViewState extends State<TypeView> {
                                     containerWidth * .35,
                                     containerHeight * .7,
                                   ),
-                                  painter: PokeballLogoPainter(
-                                    color: Colors.grey.withOpacity(0.3),
+                                  painter: const PokeballLogoPainter(
+                                    color: Color.fromARGB(100, 105, 105, 105),
                                   ),
                                 ),
                               ),
@@ -107,6 +121,7 @@ class _TypeViewState extends State<TypeView> {
                                 alignment: Alignment.center,
                                 child: ImageUtils.networkImage(
                                   url: "$typeImgUrl/${types[index].name}.png",
+                                  height: containerHeight * .5,
                                 ),
                               ),
                             ],
