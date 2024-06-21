@@ -6,10 +6,17 @@ class LoadingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Image.asset(
-        'assets/gifs/pokeball.gif',
-        width: GetSize.width * .5,
+    return Container(
+      constraints: BoxConstraints(
+        minHeight: GetSize.height,
+        minWidth: GetSize.width,
+      ),
+      color: Colors.white,
+      child: Center(
+        child: Image.asset(
+          'assets/gifs/pokeball.gif',
+          width: GetSize.width * .5,
+        ),
       ),
     );
   }
