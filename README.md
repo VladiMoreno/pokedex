@@ -60,5 +60,24 @@
     -get_it ----------------> to use the states files and charge in all the project
     -logger ----------------> to show or print some message or params in the console
     -font_awesome_flutter --> to use free icons
+    -cached_network_image --> to have in cache the images
+    -flutter_launcher_icons-> to configure icons settings
+    -url_strategy ----------> to remove the # on url (this for flutter web)
 
+## How to get the apk
+
+    If you want to build the apk from the project on your computer
+    You have to run this command:
+
+    flutter build apk --release
+
+    the --release option its for generate the apk with performance 
+
+    the process could be take a long time
+
+    when the process have done, they show you where was the apk generated
+
+    usually it is in :
+
+    project_folder/build/app/outputs/flutter-apk/app-release.apk
 
