@@ -21,7 +21,7 @@ class PokemonTypeDTO {
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "pokemon_species": pokemon.map((e) => e.toJson()).toList(),
+        "pokemon": pokemon.map((e) => e.toJson()).toList(),
       };
 }
 
