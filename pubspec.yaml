@@ -48,6 +48,7 @@ flutter_launcher_icons:
 flutter:
   assets:
     - assets/gifs/
+    - assets/gifs/pokeball.gif
     - assets/images/
     - assets/logo/
   uses-material-design: true
