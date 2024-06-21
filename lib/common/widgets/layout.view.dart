@@ -65,6 +65,9 @@ class _LayoutViewState extends State<LayoutView> {
                           case 1:
                             Get.toNamed('/generation');
                             break;
+                          case 2:
+                            Get.toNamed('/type');
+                            break;
                           default:
                             Get.toNamed('/home');
                         }
@@ -77,6 +80,10 @@ class _LayoutViewState extends State<LayoutView> {
                         BottomNavigationBarItem(
                           icon: FaIcon(FontAwesomeIcons.clockRotateLeft),
                           label: 'All Generations',
+                        ),
+                        BottomNavigationBarItem(
+                          icon: FaIcon(FontAwesomeIcons.list),
+                          label: 'All Types',
                         ),
                       ],
                     ),
