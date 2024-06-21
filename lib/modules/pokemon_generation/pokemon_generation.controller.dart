@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:pokedex/config/states.config.dart';
+import 'package:pokedex/constants/actions_state.constants.dart';
 
 import 'pokemon_generation.services.dart';
 
@@ -11,7 +13,7 @@ class PokemonGenerationController extends GetxController {
   var pokemonsInfo = RxList([]);
   var total = RxInt(0);
   var page = RxInt(2);
-  var initialValue = Rx(0);
+  var initialValue = RxInt(0);
 
   @override
   void onReady() async {
@@ -21,13 +23,29 @@ class PokemonGenerationController extends GetxController {
       if (id == null || int.tryParse(id!) == null) {
         throw Exception('Verifica el ID del pokemon por favor');
       }
+      List? pokemonsState = AppStates().pokemonGenerationState.pokemonsInfo[id];
+      List? pokemonsGeneralState =
+          AppStates().pokemonGenerationState.pokemonsGeneralInfo[id];
+      Map? paginationState =
+          AppStates().pokemonGenerationState.paginationInfo[id];
 
-      await getPokemonsByGeneration(id: int.parse(id!));
+      if (pokemonsState != null &&
+          pokemonsGeneralState != null &&
+          paginationState != null) {
+        pokemonsGeneralInfo.value = pokemonsGeneralState;
+        pokemonsInfo.value = pokemonsState;
+
+        page.value = paginationState["page"];
+        initialValue.value = paginationState["initialValue"];
+      } else {
+        await getPokemonsByGeneration(id: int.parse(id!));
+      }
 
       super.onReady();
     } catch (e) {
       isLoading.value = false;
     } finally {
+      AppStates().pokemonGenerationState.action(initialize, []);
       isLoading.value = false;
     }
   }
@@ -54,6 +72,16 @@ class PokemonGenerationController extends GetxController {
       final pokemons = await service.getPokemonsInfo(pokemonNames);
 
       pokemonsInfo.addAll(pokemons);
+
+      final data = {
+        "id": id,
+        "pokemon_species": response['data']['pokemon_species'],
+        "pokemons": pokemons,
+        "page": page.value,
+        "initialValue": initialValue.value,
+      };
+
+      AppStates().pokemonGenerationState.action(set, data);
     } catch (e) {
       isLoading.value = false;
     } finally {
@@ -80,6 +108,15 @@ class PokemonGenerationController extends GetxController {
       final pokemons = await service.getPokemonsInfo(pokemonNames);
 
       pokemonsInfo.addAll(pokemons);
+
+      final data = {
+        "id": id,
+        "pokemons": pokemons,
+        "page": page.value,
+        "initialValue": initialValue.value,
+      };
+
+      AppStates().pokemonGenerationState.action(add, data);
     } catch (e) {
       isLoading.value = false;
     } finally {
