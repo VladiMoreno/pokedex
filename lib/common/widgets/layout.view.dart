@@ -39,8 +39,8 @@ class _LayoutViewState extends State<LayoutView> {
                   children: [
                     Container(
                       constraints: BoxConstraints(
-                        maxWidth: GetSize.width > 500 ? 500 : GetSize.width,
-                        maxHeight: GetSize.height - 65,
+                        maxWidth: GetSize.width,
+                        maxHeight: GetSize.height - 100,
                       ),
                       alignment: Alignment.topCenter,
                       color: Colors.white,
@@ -52,7 +52,7 @@ class _LayoutViewState extends State<LayoutView> {
                     ),
                     Container(
                       constraints: BoxConstraints(
-                        maxWidth: GetSize.width > 500 ? 500 : GetSize.width,
+                        maxWidth: GetSize.width,
                       ),
                       height: 65,
                       child: BottomNavigationBar(
