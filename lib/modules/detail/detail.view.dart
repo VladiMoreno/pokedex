@@ -32,12 +32,18 @@ class DetailView extends StatefulWidget {
 
 class _DetailViewState extends State<DetailView> with TickerProviderStateMixin {
   late AnimationController animationController;
-  int optionSelected = 1;
+  late PageController pageController;
+  late TabController tabController;
+
+  int optionSelected = 0;
 
   @override
   void initState() {
     super.initState();
     widget.controller.onReady();
+
+    pageController = PageController(initialPage: optionSelected);
+    tabController = TabController(length: 3, vsync: this);
 
     animationController = AnimationController(
       vsync: this,
@@ -48,6 +54,7 @@ class _DetailViewState extends State<DetailView> with TickerProviderStateMixin {
   @override
   void dispose() {
     animationController.dispose();
+    pageController.dispose();
     super.dispose();
   }
 
@@ -113,7 +120,7 @@ class _DetailViewState extends State<DetailView> with TickerProviderStateMixin {
                 Container(
                   constraints: BoxConstraints(
                     maxWidth: GetSize.width,
-                    minHeight: GetSize.height * .45,
+                    minHeight: GetSize.height * .4,
                   ),
                   margin: const EdgeInsets.only(top: 50),
                   color: pokemonItem(pokemonInfo.types[0].type.name),
@@ -197,7 +204,7 @@ class _DetailViewState extends State<DetailView> with TickerProviderStateMixin {
                 Container(
                   constraints: BoxConstraints(
                     maxWidth: GetSize.width,
-                    minHeight: GetSize.height * .65,
+                    minHeight: GetSize.height * .6,
                   ),
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
@@ -206,131 +213,64 @@ class _DetailViewState extends State<DetailView> with TickerProviderStateMixin {
                     ),
                     color: Colors.white,
                   ),
-                  margin: EdgeInsets.only(top: GetSize.height * .43),
+                  margin: EdgeInsets.only(top: GetSize.height * .4),
                   child: Column(
                     children: [
-                      const SizedBox(height: 40),
-                      Row(
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              setState(() {
-                                optionSelected = 1;
-                              });
-                            },
-                            child: Container(
-                              width: GetSize.width * .32,
-                              height: 50,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                border: Border(
-                                  bottom: BorderSide(
-                                    color: optionSelected == 1
-                                        ? Colors.blue
-                                        : Colors.grey,
-                                  ),
-                                ),
-                              ),
-                              child: Text(
-                                'About',
-                                style: TextStyle(
-                                  color: optionSelected == 1
-                                      ? Colors.blue
-                                      : Colors.grey,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: GetSize.width * .01),
-                          InkWell(
-                            onTap: () {
-                              setState(() {
-                                optionSelected = 2;
-                              });
-                            },
-                            child: Container(
-                              width: GetSize.width * .325,
-                              height: 50,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                border: Border(
-                                  bottom: BorderSide(
-                                    color: optionSelected == 2
-                                        ? Colors.blue
-                                        : Colors.grey,
-                                  ),
-                                ),
-                              ),
-                              child: Text(
-                                'Stats',
-                                style: TextStyle(
-                                  color: optionSelected == 2
-                                      ? Colors.blue
-                                      : Colors.grey,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: GetSize.width * .01),
-                          InkWell(
-                            onTap: () {
-                              setState(() {
-                                optionSelected = 3;
-                              });
-                            },
-                            child: Container(
-                              width: GetSize.width * .33,
-                              height: 50,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                border: Border(
-                                  bottom: BorderSide(
-                                    color: optionSelected == 3
-                                        ? Colors.blue
-                                        : Colors.grey,
-                                  ),
-                                ),
-                              ),
-                              child: Text(
-                                'Evolutions',
-                                style: TextStyle(
-                                  color: optionSelected == 3
-                                      ? Colors.blue
-                                      : Colors.grey,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
+                      const SizedBox(height: 20),
+                      TabBar(
+                        controller: tabController,
+                        onTap: (index) {
+                          pageController.animateToPage(
+                            index,
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.easeInOut,
+                          );
+                        },
+                        tabs: const [
+                          Tab(text: 'About'),
+                          Tab(text: 'Stats'),
+                          Tab(text: 'Evolutions'),
                         ],
                       ),
-                      const SizedBox(height: 20),
-                      Stack(
-                        children: [
-                          if (optionSelected == 1) ...[
-                            AboutInfoView(
-                              pokemonInfo: pokemonInfo,
-                              specieInfo: specieInfo,
+                      SizedBox(
+                        height: GetSize.height * .6,
+                        child: PageView(
+                          controller: pageController,
+                          onPageChanged: (index) {
+                            setState(() {
+                              optionSelected = index;
+                              tabController.animateTo(index);
+                            });
+                          },
+                          children: [
+                            SingleChildScrollView(
+                              child: AboutInfoView(
+                                pokemonInfo: pokemonInfo,
+                                specieInfo: specieInfo,
+                              ),
+                            ),
+                            SingleChildScrollView(
+                              child: StatsInfoView(
+                                pokemonInfo: pokemonInfo,
+                              ),
+                            ),
+                            SingleChildScrollView(
+                              child: EvolutionInfoView(
+                                evolutionInfo: evolutionInfo,
+                              ),
                             ),
                           ],
-                          if (optionSelected == 2) ...[
-                            StatsInfoView(
-                              pokemonInfo: pokemonInfo,
-                            ),
-                          ],
-                          if (optionSelected == 3) ...[
-                            EvolutionInfoView(evolutionInfo: evolutionInfo),
-                          ],
-                        ],
-                      )
+                        ),
+                      ),
                     ],
                   ),
                 ),
                 Container(
-                  alignment: Alignment.center,
-                  margin: EdgeInsets.only(top: GetSize.height * .12),
+                  constraints: BoxConstraints(
+                    minWidth: GetSize.width,
+                    minHeight: GetSize.height * .42,
+                  ),
+                  alignment: Alignment.bottomCenter,
                   child: ImageUtils.networkImage(
                     url: '$baseImgUrl/${pokemonInfo.id}.png',
                     width: GetSize.width > 500 ? 260 : GetSize.width * .55,

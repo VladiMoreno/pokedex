@@ -47,6 +47,9 @@ class PokemonGenerationController extends GetxController {
       isLoading.value = false;
       CatchErrorManagement(
         error: e,
+        function: () {
+          Get.offNamed('/home');
+        },
       );
     } finally {
       AppStates().pokemonGenerationState.action(initialize, []);

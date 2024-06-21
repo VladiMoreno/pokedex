@@ -45,6 +45,9 @@ class DetailController extends GetxController {
       isLoading.value = false;
       CatchErrorManagement(
         error: e,
+        function: () {
+          Get.offNamed('/home');
+        },
       );
     } finally {
       AppStates().detailState.action(initialize, []);
